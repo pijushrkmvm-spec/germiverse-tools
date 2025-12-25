@@ -1,22 +1,32 @@
 import streamlit as st
 
-# 1. Page Config
+# 1. Page Config (MUST be the first command)
 st.set_page_config(
     page_title="Germiverse Tools",
     page_icon="🔬",
     layout="centered",
     initial_sidebar_state="expanded"
-)
+) # <--- The function must close here
 
-# 2. Header
+# 2. Hide Streamlit Branding (Run this AFTER config)
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
+# 3. Header
 st.title("🔬 Germiverse Bio-Suite")
 st.markdown("### Advanced Computational Tools for Biologists")
 st.markdown("---")
 
-# 3. Introduction
+# 4. Introduction
 st.info("👋 Welcome! Select a tool from the sidebar to begin your analysis.")
 
-# 4. Tool Cards (Using Columns for layout)
+# 5. Tool Cards (Using Columns for layout)
 col1, col2 = st.columns(2)
 
 with col1:
@@ -35,7 +45,7 @@ with col2:
 
 st.markdown("---")
 
-# 5. Footer / Resources
+# 6. Footer / Resources
 st.markdown("#### 📚 Quick Resources")
 st.markdown("""
 * **NCBI BLAST:** [blast.ncbi.nlm.nih.gov](https://blast.ncbi.nlm.nih.gov/)
@@ -43,7 +53,7 @@ st.markdown("""
 * **PDB:** [rcsb.org](https://www.rcsb.org/)
 """)
 
-# 6. Sidebar Info
+# 7. Sidebar Info
 st.sidebar.success("Select a tool above 👆")
 st.sidebar.markdown("---")
 st.sidebar.markdown("Developed for **Germiverse**")
