@@ -22,7 +22,8 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 
 # 3. Header
 st.title("🔬 Germiverse Bio-Suite")
-st.markdown("### Advanced Computational Tools for Biologists")
+st.markdown("### Computational Tools for Biologists")
+st.markdown("### Best viewed in Desktop, please turn on Desktop Mode if you are using Mobile")
 st.markdown("---")
 
 # 4. Introduction
