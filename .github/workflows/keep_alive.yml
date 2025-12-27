@@ -2,19 +2,22 @@ name: Keep App Alive
 
 on:
   schedule:
-    # Runs at 00:00 UTC every day (You can adjust this)
+    # Runs at 00:00 UTC every day
     - cron: "0 0 * * *"
-  workflow_dispatch: # Allows you to run it manually to test
+  workflow_dispatch: # Allows manual run
 
 jobs:
   wake_up:
     runs-on: ubuntu-latest
     steps:
-      - name: Wake up Streamlit App
+      - name: Poke Streamlit App
         run: |
-          # Use curl to ping the Health Check URL
-          # -L: Follow redirects
-          # -A: Pretend to be Chrome (User Agent)
-          # -m 30: Timeout after 30 seconds
-          curl -L -m 30 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0" \
-          https://germiverse.streamlit.app/_stcore/health
+          # 1. Ping the Health Check (Don't follow redirects, just hit it)
+          curl -I -X GET -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0" \
+          https://germiverse-tools.streamlit.app/_stcore/health || true
+          
+          # 2. Ping the Main URL (Just in case)
+          curl -I -X GET -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0" \
+          https://germiverse.streamlit.app/ || true
+          
+          echo "✅ Pings sent. App should be waking up."
