@@ -2,8 +2,8 @@ name: Keep App Alive
 
 on:
   schedule:
-    # Runs at 00:00 UTC every day
-    - cron: "0 0 * * *"
+    # ⏱️ UPDATED: Runs every 8 hours (00:00, 08:00, 16:00 UTC)
+    - cron: "0 */8 * * *"
   workflow_dispatch: # Allows manual run
 
 jobs:
@@ -12,11 +12,12 @@ jobs:
     steps:
       - name: Poke Streamlit App
         run: |
-          # 1. Ping the Health Check (Don't follow redirects, just hit it)
+          # 1. Ping the Health Check
           curl -I -X GET -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0" \
-          https://germiverse-tools.streamlit.app/_stcore/health || true
+          https://germiverse.streamlit.app/_stcore/health || true
           
-          # 2. Ping the Main URL (Just in case)
+          # 2. Ping the Main URL
+          # (Make sure this URL matches your actual app!)
           curl -I -X GET -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0" \
           https://germiverse.streamlit.app/ || true
           
