@@ -2,8 +2,9 @@ name: Keep App Alive
 
 on:
   schedule:
-    # ⏱️ UPDATED: Runs every 8 hours (00:00, 08:00, 16:00 UTC)
-    - cron: "0 */8 * * *"
+    # ⏱️ UPDATED: Run every 2 hours (Aggressive Mode)
+    # This ensures the app never sits idle long enough to sleep.
+    - cron: "0 */2 * * *"
   workflow_dispatch: # Allows manual run
 
 jobs:
@@ -12,13 +13,20 @@ jobs:
     steps:
       - name: Poke Streamlit App
         run: |
-          # 1. Ping the Health Check
-          curl -I -X GET -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0" \
+          # 1. Ping the Health Check (GET request, Follow Redirects)
+          # We removed "-I" so it actually downloads the response (simulating a view)
+          echo "Poking Health Check..."
+          curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0" \
           https://germiverse.streamlit.app/_stcore/health || true
           
-          # 2. Ping the Main URL
-          # (Make sure this URL matches your actual app!)
-          curl -I -X GET -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0" \
-          https://germiverse.streamlit.app/ || true
+          # 2. Wait 10 seconds to let the server spin up
+          echo "Waiting for spin up..."
+          sleep 10
           
-          echo "✅ Pings sent. App should be waking up."
+          # 3. Ping the Main URL (GET request)
+          echo "Poking Main URL..."
+          # > /dev/null hides the massive HTML output from your logs
+          curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0" \
+          https://germiverse.streamlit.app/ > /dev/null || true
+          
+          echo "✅ Wake up call completed."
