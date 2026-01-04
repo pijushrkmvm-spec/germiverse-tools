@@ -29,7 +29,7 @@ st.markdown("---")
 st.info("👋 Welcome! Open the sidebar (top-left >) to select a tool.")
 
 # 5. Tool Cards
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown("### 🧬 DNA Analyzer")
@@ -44,6 +44,14 @@ with col2:
     st.markdown("- Molecular Weight")
     st.markdown("- Isoelectric Point (pI)")
     st.markdown("- Amino Acid Composition Charts")
+
+with col3:
+    st.markdown("### Sample Calculator")
+    st.write("Perform basic arithmetic operations.")
+    st.markdown("- Addition")
+    st.markdown("- Subtraction")
+    st.markdown("- Multiplication")
+    st.markdown("- Division")
 
 st.markdown("---")
 
