@@ -58,4 +58,4 @@ st.markdown("""
 # 7. Sidebar Footer
 st.sidebar.success("Select a tool above 👆")
 st.sidebar.markdown("---")
-st.sidebar.markdown("Developed for **Germiverse** [biofix.kesug.com](https://biofix.kesug.com/)")
+st.sidebar.markdown("Developed for [**Germiverse**](https://biofix.kesug.com/)")
