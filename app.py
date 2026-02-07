@@ -45,14 +45,6 @@ with col2:
     st.markdown("- Isoelectric Point (pI)")
     st.markdown("- Amino Acid Composition Charts")
 
-with col3:
-    st.markdown("### Sample Calculator")
-    st.write("Perform basic arithmetic operations.")
-    st.markdown("- Addition")
-    st.markdown("- Subtraction")
-    st.markdown("- Multiplication")
-    st.markdown("- Division")
-
 st.markdown("---")
 
 # 6. Resources
